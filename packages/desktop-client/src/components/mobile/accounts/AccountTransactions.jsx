@@ -144,7 +144,9 @@ function TransactionListWithPreviews({ account }) {
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState([]);
-  const prependTransactions = usePreviewTransactions();
+  const prependTransactions = usePreviewTransactions({
+    accountId: account?.id,
+  });
   const allTransactions = useMemo(
     () =>
       !isSearching ? prependTransactions.concat(transactions) : transactions,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { css } from 'glamor';
+import { css } from '@emotion/css';
 
 import { useNavigate } from '../../../hooks/useNavigate';
 import { SvgAdd } from '../../../icons/v1';
@@ -23,17 +23,15 @@ export function AddTransactionButton({
     <Button
       variant="bare"
       aria-label="Add transaction"
-      className={String(
-        css({
-          justifyContent: 'center',
+      className={css({
+        justifyContent: 'center',
+        color: theme.mobileHeaderText,
+        margin: 10,
+        ':hover': {
           color: theme.mobileHeaderText,
-          margin: 10,
-          ':hover': {
-            color: theme.mobileHeaderText,
-            background: theme.mobileHeaderTextHover,
-          },
-        }),
-      )}
+          background: theme.mobileHeaderTextHover,
+        },
+      })}
       onPress={() => {
         navigate(to, { state: { accountId, categoryId } });
       }}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { css } from 'glamor';
+import { css } from '@emotion/css';
 
 import { envelopeBudget } from 'loot-core/src/client/queries';
 
@@ -68,7 +68,7 @@ export function ToBudgetAmount({
             <Block
               onClick={onClick}
               data-cellname={sheetName}
-              className={`${css([
+              className={css([
                 styles.veryLargeText,
                 {
                   fontWeight: 400,
@@ -84,7 +84,7 @@ export function ToBudgetAmount({
                   },
                 },
                 amountStyle,
-              ])}`}
+              ])}
             >
               {format(num, 'financial')}
             </Block>

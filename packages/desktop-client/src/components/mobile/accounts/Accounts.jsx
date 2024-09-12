@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { css } from 'glamor';
+import { css } from '@emotion/css';
 
 import { replaceModal, syncAndDownload } from 'loot-core/src/client/actions';
 import * as queries from 'loot-core/src/client/queries';
@@ -172,17 +172,15 @@ function AccountList({
             <Button
               variant="bare"
               aria-label="Add account"
-              className={String(
-                css({
-                  justifyContent: 'center',
+              className={css({
+                justifyContent: 'center',
+                color: theme.mobileHeaderText,
+                margin: 10,
+                ':hover': {
                   color: theme.mobileHeaderText,
-                  margin: 10,
-                  ':hover': {
-                    color: theme.mobileHeaderText,
-                    background: theme.mobileHeaderTextHover,
-                  },
-                }),
-              )}
+                  background: theme.mobileHeaderTextHover,
+                },
+              })}
               onPress={onAddAccount}
             >
               <SvgAdd width={20} height={20} />

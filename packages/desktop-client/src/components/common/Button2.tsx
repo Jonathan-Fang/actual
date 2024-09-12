@@ -10,7 +10,7 @@ import {
   Button as ReactAriaButton,
 } from 'react-aria-components';
 
-import { css } from 'glamor';
+import { css } from '@emotion/css';
 
 import { AnimatedLoading } from '../../icons/AnimatedLoading';
 import { type CSSProperties, styles, theme } from '../../style';
@@ -157,31 +157,29 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const defaultButtonClassName: ReactAriaButtonClassNameFn = renderProps =>
-      String(
-        css({
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          padding: _getPadding(variant),
-          margin: 0,
-          overflow: 'hidden',
-          display: 'flex',
-          borderRadius: 4,
-          backgroundColor: backgroundColor[variantWithDisabled],
-          border: _getBorder(variant, variantWithDisabled),
-          color: textColor[variantWithDisabled],
-          transition: 'box-shadow .25s',
-          WebkitAppRegion: 'no-drag',
-          ...styles.smallText,
-          ...(renderProps.isDisabled
-            ? {}
-            : {
-                '&[data-hovered]': hoveredStyle,
-                '&[data-pressed]': activeStyle,
-              }),
-          ...(Icon ? { paddingLeft: 0 } : {}),
-        }),
-      );
+      css({
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        padding: _getPadding(variant),
+        margin: 0,
+        overflow: 'hidden',
+        display: 'flex',
+        borderRadius: 4,
+        backgroundColor: backgroundColor[variantWithDisabled],
+        border: _getBorder(variant, variantWithDisabled),
+        color: textColor[variantWithDisabled],
+        transition: 'box-shadow .25s',
+        WebkitAppRegion: 'no-drag',
+        ...styles.smallText,
+        ...(renderProps.isDisabled
+          ? {}
+          : {
+              '&[data-hovered]': hoveredStyle,
+              '&[data-pressed]': activeStyle,
+            }),
+        ...(Icon ? { paddingLeft: 0 } : {}),
+      });
 
     const buttonClassName: ReactAriaButtonClassNameFn = renderProps =>
       typeof props.className === 'function'

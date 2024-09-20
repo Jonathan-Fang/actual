@@ -113,17 +113,14 @@ function ManageRulesContent({
   const { list: categories } = useCategories();
   const payees = usePayees();
   const accounts = useAccounts();
-  const state = {
-    payees,
-    accounts,
-    schedules,
-  };
   const filterData = useMemo(
     () => ({
-      ...state,
+      payees,
+      accounts,
+      schedules,
       categories,
     }),
-    [state, categories],
+    [payees, accounts, schedules, categories],
   );
 
   const filteredRules = useMemo(

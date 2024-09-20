@@ -2,13 +2,14 @@
 import React, {
   type ComponentType,
   type ComponentPropsWithoutRef,
+  type CSSProperties,
   useCallback,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useFeatureFlag } from '../../hooks/useFeatureFlag';
 import { SvgArrowThinRight } from '../../icons/v1';
-import { type CSSProperties, theme, styles } from '../../style';
+import { theme, styles } from '../../style';
 import { Tooltip } from '../common/Tooltip';
 import { View } from '../common/View';
 import { type Binding } from '../spreadsheet';

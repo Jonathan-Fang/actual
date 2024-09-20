@@ -4,6 +4,7 @@ import React, {
   type ComponentType,
   type ReactNode,
   type SVGProps,
+  type CSSProperties,
 } from 'react';
 import {
   type ButtonRenderProps as ReactAriaButtonRenderProps,
@@ -13,7 +14,7 @@ import {
 import { css } from '@emotion/css';
 
 import { AnimatedLoading } from '../../icons/AnimatedLoading';
-import { type CSSProperties, styles, theme } from '../../style';
+import { styles, theme } from '../../style';
 
 import { View } from './View';
 

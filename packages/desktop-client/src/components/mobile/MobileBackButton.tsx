@@ -1,6 +1,6 @@
 import React, { type ComponentPropsWithoutRef } from 'react';
 
-import { css } from 'glamor';
+import { css } from '@emotion/css';
 
 import { useNavigate } from '../../hooks/useNavigate';
 import { SvgCheveronLeft } from '../../icons/v1';
@@ -19,20 +19,18 @@ export function MobileBackButton({
   return (
     <Button
       variant="bare"
-      className={String(
-        css({
+      className={css({
+        color: theme.mobileHeaderText,
+        justifyContent: 'center',
+        margin: 10,
+        paddingLeft: 5,
+        paddingRight: 3,
+        '&[data-hovered]': {
           color: theme.mobileHeaderText,
-          justifyContent: 'center',
-          margin: 10,
-          paddingLeft: 5,
-          paddingRight: 3,
-          '&[data-hovered]': {
-            color: theme.mobileHeaderText,
-            background: theme.mobileHeaderTextHover,
-          },
-          ...style,
-        }),
-      )}
+          background: theme.mobileHeaderTextHover,
+        },
+        ...style,
+      })}
       onPress={onPress || (() => navigate(-1))}
       {...props}
     >

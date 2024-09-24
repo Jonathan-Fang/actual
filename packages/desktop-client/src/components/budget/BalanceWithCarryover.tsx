@@ -139,88 +139,86 @@ export function BalanceWithCarryover({
   return (
     <CellValue binding={balance} type="financial" {...props}>
       {({ type, name, value: balanceValue }) => (
-        <>
-          <Tooltip
-            content={
-              <View style={{ padding: 10 }}>
-                <span style={{ fontWeight: 'bold' }}>
-                  {getDifferenceToGoal(balanceValue) === 0 ? (
-                    <span style={{ color: theme.noticeText }}>
-                      {t('Fully funded')}
-                    </span>
-                  ) : getDifferenceToGoal(balanceValue) > 0 ? (
-                    <span style={{ color: theme.noticeText }}>
-                      {t('Overfunded ({{amount}})', {
-                        amount: format(
-                          getDifferenceToGoal(balanceValue),
-                          'financial',
-                        ),
-                      })}
-                    </span>
-                  ) : (
-                    <span style={{ color: theme.errorText }}>
-                      {t('Underfunded ({{amount}})', {
-                        amount: format(
-                          getDifferenceToGoal(balanceValue),
-                          'financial',
-                        ),
-                      })}
-                    </span>
-                  )}
-                </span>
-                <GoalTooltipRow>
-                  <div>{t('Goal Type:')}</div>
-                  <div>{longGoalValue === 1 ? 'Long' : 'Template'}</div>
-                </GoalTooltipRow>
-                <GoalTooltipRow>
-                  <div>{t('Goal:')}</div>
-                  <div>{format(goalValue, 'financial')}</div>
-                </GoalTooltipRow>
-                <GoalTooltipRow>
-                  {longGoalValue !== 1 ? (
-                    <>
-                      <div>{t('Budgeted:')}</div>
-                      <div>{format(budgetedValue, 'financial')}</div>
-                    </>
-                  ) : (
-                    <>
-                      <div>{t('Balance:')}</div>
-                      <div>{format(balanceValue, type)}</div>
-                    </>
-                  )}
-                </GoalTooltipRow>
-              </View>
-            }
-            style={{ ...styles.tooltip, borderRadius: '0px 5px 5px 0px' }}
-            placement="bottom"
-            triggerProps={{
-              delay: 750,
-              isDisabled: !isGoalTemplatesEnabled || goalValue == null,
-            }}
-          >
-            {children ? (
-              children({
-                type,
-                name,
-                value: balanceValue,
-                className: getDefaultClassName(balanceValue),
-              })
-            ) : (
-              <CellValueText
-                type={type}
-                name={name}
-                value={balanceValue}
-                className={getDefaultClassName(balanceValue)}
-              />
-            )}
-          </Tooltip>
+        <Tooltip
+          content={
+            <View style={{ padding: 10 }}>
+              <span style={{ fontWeight: 'bold' }}>
+                {getDifferenceToGoal(balanceValue) === 0 ? (
+                  <span style={{ color: theme.noticeText }}>
+                    {t('Fully funded')}
+                  </span>
+                ) : getDifferenceToGoal(balanceValue) > 0 ? (
+                  <span style={{ color: theme.noticeText }}>
+                    {t('Overfunded ({{amount}})', {
+                      amount: format(
+                        getDifferenceToGoal(balanceValue),
+                        'financial',
+                      ),
+                    })}
+                  </span>
+                ) : (
+                  <span style={{ color: theme.errorText }}>
+                    {t('Underfunded ({{amount}})', {
+                      amount: format(
+                        getDifferenceToGoal(balanceValue),
+                        'financial',
+                      ),
+                    })}
+                  </span>
+                )}
+              </span>
+              <GoalTooltipRow>
+                <div>{t('Goal Type:')}</div>
+                <div>{longGoalValue === 1 ? 'Long' : 'Template'}</div>
+              </GoalTooltipRow>
+              <GoalTooltipRow>
+                <div>{t('Goal:')}</div>
+                <div>{format(goalValue, 'financial')}</div>
+              </GoalTooltipRow>
+              <GoalTooltipRow>
+                {longGoalValue !== 1 ? (
+                  <>
+                    <div>{t('Budgeted:')}</div>
+                    <div>{format(budgetedValue, 'financial')}</div>
+                  </>
+                ) : (
+                  <>
+                    <div>{t('Balance:')}</div>
+                    <div>{format(balanceValue, type)}</div>
+                  </>
+                )}
+              </GoalTooltipRow>
+            </View>
+          }
+          style={{ ...styles.tooltip, borderRadius: '0px 5px 5px 0px' }}
+          placement="bottom"
+          triggerProps={{
+            delay: 750,
+            isDisabled: !isGoalTemplatesEnabled || goalValue == null,
+          }}
+        >
+          {children ? (
+            children({
+              type,
+              name,
+              value: balanceValue,
+              className: getDefaultClassName(balanceValue),
+            })
+          ) : (
+            <CellValueText
+              type={type}
+              name={name}
+              value={balanceValue}
+              className={getDefaultClassName(balanceValue)}
+            />
+          )}
 
           {carryoverValue && (
             <CarryoverIndicatorComponent
               style={getBalanceAmountStyle(balanceValue)}
             />
           )}
-        </>
+        </Tooltip>
       )}
     </CellValue>
   );

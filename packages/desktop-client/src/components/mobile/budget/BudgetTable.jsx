@@ -279,7 +279,12 @@ function BudgetCell({
   };
 
   return (
-    <CellValue binding={binding} type="financial" data-testid={name} {...props}>
+    <CellValue
+      binding={binding}
+      type="financial"
+      data-testid={`budgeted-${category.name}`}
+      {...props}
+    >
       {({ type, name, value }) =>
         children?.({
           type,
@@ -295,6 +300,7 @@ function BudgetCell({
               ...makeAmountGrey(value),
             }}
             onPress={onOpenCategoryBudgetMenu}
+            data-testid={`budgeted-${category.name}-button`}
           >
             <View>
               <PrivacyFilter>
@@ -580,7 +586,6 @@ const ExpenseCategory = memo(function ExpenseCategory({
         >
           <BudgetCell
             key={`${show3Cols}|${showBudgetedCol}`}
-            name="budgeted"
             binding={budgeted}
             type="financial"
             category={category}
@@ -596,7 +601,11 @@ const ExpenseCategory = memo(function ExpenseCategory({
             alignItems: 'flex-end',
           }}
         >
-          <CellValue name="spent" binding={spent} type="financial">
+          <CellValue
+            binding={spent}
+            type="financial"
+            data-testid={`spent-${category.name}`}
+          >
             {({ type, value }) => (
               <Button
                 variant="bare"
@@ -604,6 +613,7 @@ const ExpenseCategory = memo(function ExpenseCategory({
                   ...PILL_STYLE,
                 }}
                 onPress={onShowActivity}
+                data-testid={`spent-${category.name}-button`}
               >
                 <PrivacyFilter>
                   <AutoTextSize
@@ -634,6 +644,7 @@ const ExpenseCategory = memo(function ExpenseCategory({
           }}
         >
           <BalanceWithCarryover
+            data-testid={`balance-${category.name}`}
             type="financial"
             carryover={carryover}
             balance={balance}
@@ -666,6 +677,7 @@ const ExpenseCategory = memo(function ExpenseCategory({
                   maxWidth: columnWidth,
                 }}
                 onPress={onOpenBalanceMenu}
+                data-testid={`balance-${category.name}-button`}
               >
                 <PrivacyFilter>
                   <AutoTextSize
@@ -1187,7 +1199,6 @@ const IncomeCategory = memo(function IncomeCategory({
             }}
           >
             <BudgetCell
-              name="budgeted"
               binding={budgeted}
               type="financial"
               category={category}
@@ -1688,6 +1699,7 @@ function BudgetTableHeader({
 
   return (
     <View
+      data-testid="budget-table-header"
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -1747,6 +1759,7 @@ function BudgetTableHeader({
                   ...buttonStyle,
                   width: columnWidth,
                 }}
+                data-testid="toggle-budget-table-columns"
               >
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -1909,6 +1922,7 @@ function MonthSelector({
       }}
     >
       <Button
+        aria-label="Previous month"
         variant="bare"
         onPress={() => {
           if (prevEnabled) {
@@ -1930,12 +1944,14 @@ function MonthSelector({
         onPress={() => {
           onOpenMonthMenu?.(month);
         }}
+        data-testid="page-header-month-button"
       >
         <Text style={styles.underlinedText}>
           {monthUtils.format(month, 'MMMM ‘yy')}
         </Text>
       </Button>
       <Button
+        aria-label="Next month"
         variant="bare"
         onPress={() => {
           if (nextEnabled) {

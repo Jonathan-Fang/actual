@@ -1759,7 +1759,6 @@ function BudgetTableHeader({
                   ...buttonStyle,
                   width: columnWidth,
                 }}
-                data-testid="toggle-budget-table-columns"
               >
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
